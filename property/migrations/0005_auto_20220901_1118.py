@@ -4,12 +4,10 @@ from django.db import migrations
 
 
 def set_building_type(apps, schema_editor):
-    flats = apps.get_model('property', 'Flat')
-    for flat in flats.objects.all():
-        if flat.construction_year >= 2015:
-            flat.new_building = True
-        else:
-            flat.new_building = False
+    Flat = apps.get_model('property', 'Flat')
+    flats = Flat.objets.all()
+    for flat in flats:
+        flat.new_building = flat.construction_year >= 2015
         flat.save()
 
 
